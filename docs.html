@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OUAK Mods Docs</title>
+<meta name="description" content="Documentation for the OUAK Modding API and the OUAK mods.">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html"><span class="ball" aria-hidden="true"></span>OUAK Mods</a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#install">Install</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="docs.html" aria-current="page">Docs</a></li>
+        <li><a href="https://github.com/nmlacker/OUAK-hub/releases">Releases</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="docs-layout">
+    <nav class="panel docs-nav" aria-label="Documents" id="docnav">
+      <a href="docs.html?doc=api" data-doc="api">Modding API (guide)</a>
+      <a href="docs.html?doc=modmenu" data-doc="modmenu">Mod Menu</a>
+      <a href="docs.html?doc=multiplayer" data-doc="multiplayer">Multiplayer</a>
+      <a href="docs.html?doc=songselector" data-doc="songselector">Song Selector</a>
+      <a href="docs.html?doc=dashbar" data-doc="dashbar">Dash Bar</a>
+    </nav>
+    <article class="panel docs-body">
+      <div class="md" id="doc" aria-live="polite">Loading…</div>
+    </article>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>An unofficial fan project, not affiliated with or endorsed by Bandai Namco Entertainment.</p>
+    <p><a href="https://github.com/nmlacker/OUAK-hub">GitHub</a> · <a href="index.html">Home</a> · <a href="faq.html">FAQ</a></p>
+  </div>
+</footer>
+
+<script>
+(async function () {
+  const files = { api: "docs/api.md", modmenu: "docs/modmenu.md", multiplayer: "docs/multiplayer.md", songselector: "docs/songselector.md", dashbar: "docs/dashbar.md" };
+  // Links between the READMEs, as the source tree names them, open here instead.
+  const links = { "README.md": "api", "../README.md": "api", "OUAKModMenu/README.md": "modmenu", "OUAKMultiplayer/README.md": "multiplayer", "OUAKSongSelector/README.md": "songselector", "OUAKDashBar/README.md": "dashbar" };
+  const key = new URLSearchParams(location.search).get("doc") || "api";
+  const name = files[key] ? key : "api";
+  document.querySelectorAll("#docnav a").forEach(a => a.classList.toggle("active", a.dataset.doc === name));
+  const out = document.getElementById("doc");
+  try {
+    const r = await fetch(files[name]);
+    if (!r.ok) throw new Error(r.status);
+    out.innerHTML = DOMPurify.sanitize(marked.parse(await r.text()));
+    out.querySelectorAll("a[href]").forEach(a => {
+      const h = a.getAttribute("href");
+      if (links[h]) a.setAttribute("href", "docs.html?doc=" + links[h]);
+    });
+    const h1 = out.querySelector("h1");
+    if (h1) document.title = h1.textContent + " · OUAK Mods";
+  } catch (e) {
+    out.textContent = "This document couldn't be loaded.";
+  }
+})();
+</script>
+</body>
+</html>

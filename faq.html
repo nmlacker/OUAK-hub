@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OUAK Mods FAQ</title>
+<meta name="description" content="Questions about installing and using the OUAK mods for Once Upon a KATAMARI.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html"><span class="ball" aria-hidden="true"></span>OUAK Mods</a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#install">Install</a></li>
+        <li><a href="faq.html" aria-current="page">FAQ</a></li>
+        <li><a href="docs.html">Docs</a></li>
+        <li><a href="https://github.com/nmlacker/OUAK-hub/releases">Releases</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="panel" aria-labelledby="faq-title">
+    <h1 id="faq-title" style="margin-top: 0;">Frequently asked questions</h1>
+
+    <details>
+      <summary>What do I need?</summary>
+      <p>Once Upon a KATAMARI on Windows (Steam) and MelonLoader 0.7. The mods are made for the game as it is on Steam; a game update can break them until the mods are updated.</p>
+    </details>
+
+    <details>
+      <summary>Which mods do I need?</summary>
+      <p>The OUAK Modding API always; it's what the other mods are built on. The download also holds the Mod Menu and Multiplayer; Song Selector and Dash Bar are standalone mods, released separately. None of them needs another, only the API.</p>
+    </details>
+
+    <details>
+      <summary>How do I open the mod window?</summary>
+      <p>Press <kbd>Right Shift</kbd> in game. Every installed mod adds its tabs to that one window. You can rebind the key in its Keys tab, and a controller can move through it too.</p>
+    </details>
+
+    <details>
+      <summary>How do updates work?</summary>
+      <p>The API checks for a new release each time the game starts and installs it in the background. Once it has, a message asks you to restart the game or quit, and the new version runs from the next start. To turn automatic updates off, set <code>AutoUpdate = false</code> under <code>[OUAKModAPI]</code> in <code>UserData/MelonPreferences.cfg</code>.</p>
+    </details>
+
+    <details>
+      <summary>Can I play online with friends?</summary>
+      <p>Yes, with OUAK Multiplayer: host or join from its Online tab in the mod window. Everyone in a session needs the same version, which automatic updates take care of.</p>
+    </details>
+
+    <details>
+      <summary>Will the mods change my save?</summary>
+      <p>The API on its own doesn't change how the game plays, apart from fixing bugs in the game's own Katamari Ball. Its fixes for unfinished features only act when a mod uses them. The Mod Menu can change your save (unlocks, for example) and makes backups you can restore from its window. Back up your save before trying anything big.</p>
+    </details>
+
+    <details>
+      <summary>How do I add my own music?</summary>
+      <p>With OUAK Song Selector, a standalone mod (released separately): put your files in its music folder (see its docs). New songs and playlists show up in game on their own, with no restart needed.</p>
+    </details>
+
+    <details>
+      <summary>Something went wrong. Where are the logs?</summary>
+      <p>Every game session gets its own folder in <code>UserData/OUAKModAPI/Logs/Sessions</code>, with everything that happened (<code>all.log</code>), just the problems (<code>errors.log</code>) and a file per mod. A session that crashed is marked so at the next start. Logs from online play can hold player names, so check them before you share them.</p>
+    </details>
+
+    <details>
+      <summary>How do I uninstall?</summary>
+      <p>Delete the OUAK files from <code>Mods</code> (they start with <code>OUAK</code>), and <code>ImGui.NET.dll</code> and <code>cimgui.dll</code> from <code>UserLibs</code>. To remove MelonLoader too, follow its own uninstall steps.</p>
+    </details>
+
+    <details>
+      <summary>Can I make my own mods?</summary>
+      <p>Yes. The OUAK Modding API is meant for it: start from its example mod and the <a href="docs.html">documentation</a>. Small mods can even be "hot mods" that reload while the game runs.</p>
+    </details>
+
+    <details>
+      <summary>Is this official?</summary>
+      <p>No. It's an unofficial fan project, not affiliated with or endorsed by Bandai Namco Entertainment. You need your own copy of the game.</p>
+    </details>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>An unofficial fan project, not affiliated with or endorsed by Bandai Namco Entertainment. Once Upon a KATAMARI is their trademark.</p>
+    <p><a href="https://github.com/nmlacker/OUAK-hub">GitHub</a> · <a href="index.html">Home</a> · <a href="docs.html">Docs</a></p>
+  </div>
+</footer>
+</body>
+</html>
