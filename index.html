@@ -17,7 +17,7 @@
         <li><a href="index.html#install">Install</a></li>
         <li><a href="faq.html">FAQ</a></li>
         <li><a href="docs.html">Docs</a></li>
-        <li><a href="https://github.com/nmlacker/OUAK-hub/releases">Releases</a></li>
+        <li><a href="https://github.com/nmlacker/OUAK-Mods/releases">Releases</a></li>
       </ul>
     </nav>
   </div>
@@ -28,8 +28,8 @@
     <h1>Mods for Once Upon a KATAMARI</h1>
     <p class="lead">Online play, a mod menu for speedrunning and messing around, custom music playlists, a dash gauge, and the OUAK Modding API: fixes for the game's broken and unfinished features, and a base for making your own mods.</p>
     <div class="buttons">
-      <a class="btn" id="dl-mod" href="https://github.com/nmlacker/OUAK-hub/releases/latest/download/OUAK_Mods.zip">Download the mods</a>
-      <a class="btn secondary" id="dl-src" href="https://github.com/nmlacker/OUAK-hub/releases/latest">Download the source</a>
+      <a class="btn" id="dl-mod" href="https://github.com/nmlacker/OUAK-Mods/releases/latest/download/OUAK_Mods.zip">Download the mods</a>
+      <a class="btn secondary" id="dl-src" href="https://github.com/nmlacker/OUAK-Mods">Download the source</a>
     </div>
     <p class="release" id="release" aria-live="polite">Checking the latest release…</p>
   </section>
@@ -85,7 +85,7 @@
 <footer>
   <div class="wrap">
     <p>An unofficial fan project, not affiliated with or endorsed by Bandai Namco Entertainment. Once Upon a KATAMARI is their trademark. You need your own copy of the game.</p>
-    <p><a href="https://github.com/nmlacker/OUAK-hub">GitHub</a> · <a href="faq.html">FAQ</a> · <a href="docs.html">Docs</a></p>
+    <p><a href="https://github.com/nmlacker/OUAK-Mods">GitHub</a> · <a href="faq.html">FAQ</a> · <a href="docs.html">Docs</a></p>
   </div>
 </footer>
 
@@ -93,13 +93,13 @@
 (async function () {
   const out = document.getElementById("release");
   try {
-    const r = await fetch("https://api.github.com/repos/nmlacker/OUAK-hub/releases/latest", { headers: { Accept: "application/vnd.github+json" } });
+    const r = await fetch("https://api.github.com/repos/nmlacker/OUAK-Mods/releases/latest", { headers: { Accept: "application/vnd.github+json" } });
     if (!r.ok) { out.textContent = "No release has been published yet. Check back soon."; return; }
     const rel = await r.json();
     const date = new Date(rel.published_at).toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
     out.textContent = "Latest: " + rel.tag_name + " · " + date;
-    const src = (rel.assets || []).find(a => a.name === "OUAK_Mods_Source.zip");
-    if (src) document.getElementById("dl-src").href = src.browser_download_url;
+    // GitHub's own source archive of that release.
+    document.getElementById("dl-src").href = "https://github.com/nmlacker/OUAK-Mods/archive/refs/tags/" + encodeURIComponent(rel.tag_name) + ".zip";
   } catch (e) {
     out.textContent = "See the Releases page for the latest version.";
   }
