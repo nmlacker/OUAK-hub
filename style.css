@@ -27,7 +27,7 @@ body {
 a { color: var(--yellow); }
 a:hover { color: #fff59a; }
 
-.wrap { width: min(1100px, 100% - 32px); margin: 0 auto; }
+.wrap { width: min(1760px, 100% - 32px); margin: 0 auto; }
 
 /* header */
 .top { padding: 18px 0; }
@@ -90,7 +90,7 @@ kbd { background: #fff; color: var(--ink); font-weight: 700; }
 details { background: var(--panel-deep); border-radius: 18px; padding: 12px 18px; margin: 10px 0; border: 3px solid transparent; }
 details[open] { border-color: var(--green); }
 summary { cursor: pointer; font-weight: 800; font-size: 1.08rem; }
-details p, details ul { color: var(--muted); }
+details p, details ul { color: var(--muted); max-width: 95ch; }
 
 /* docs */
 .docs-layout { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; }
@@ -98,7 +98,7 @@ details p, details ul { color: var(--muted); }
 .docs-nav a { display: block; text-decoration: none; color: #fff; font-weight: 700; padding: 8px 14px; border-radius: 16px; margin: 4px 0; background: var(--green-dark); }
 .docs-nav a.active { background: var(--cream); color: var(--ink); }
 .docs-body { flex: 999 1 560px; min-width: 0; }
-.md { color: #f2fff0; }
+.md { color: #f2fff0; max-width: 110ch; }
 .md h1, .md h2, .md h3 { line-height: 1.25; }
 .md h1 { font-size: 1.9rem; }
 .md pre { background: var(--panel-deep); border-radius: 14px; padding: 14px; overflow-x: auto; }
@@ -119,7 +119,7 @@ nav a.icon-link { display: inline-flex; align-items: center; gap: 6px; }
 .modpack { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 12px 36px; align-items: start;
   background: linear-gradient(160deg, var(--panel) 0%, var(--panel-deep) 100%); border-color: var(--yellow); }
 .modpack h1 { margin: 4px 0 10px; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.1; text-shadow: 0 4px 0 rgba(0,0,0,0.18); }
-.modpack .lead { color: var(--muted); font-size: clamp(1.02rem, 2vw, 1.2rem); margin: 0 0 22px; }
+.modpack .lead { color: var(--muted); font-size: clamp(1.02rem, 2vw, 1.25rem); margin: 0 0 22px; max-width: 62ch; }
 .modpack .release { text-align: left; }
 .pack-side { background: rgba(0,0,0,0.18); border-radius: 20px; padding: 16px 20px; }
 .pack-side h2 { font-size: 1.15rem; margin: 0 0 6px; }
@@ -172,6 +172,15 @@ nav a.icon-link { display: inline-flex; align-items: center; gap: 6px; }
   .card.mod > .pic, .card.mod > .mod-title, .card.mod > .desc { grid-column: 1; grid-row: auto; }
   .card.mod > .pic { min-height: 0; aspect-ratio: 16 / 9; }
   .pic.big { width: 80px; height: 80px; }
+}
+
+@media (min-width: 1500px) {
+  body { font-size: 17px; }
+  .grid.mods { grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 20px; }
+  .card.mod { grid-template-columns: 230px minmax(0, 1fr); padding: 20px; }
+  .card.mod > .pic { min-height: 200px; }
+  .pic.big { width: 140px; height: 140px; }
+  .modpack { gap: 12px 56px; }
 }
 
 a.linkcard { text-decoration: none; color: #fff; display: block; }
