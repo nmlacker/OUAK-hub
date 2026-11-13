@@ -8,16 +8,20 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="gh" viewBox="0 0 16 16"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></symbol>
+</svg>
 <header class="top">
   <div class="wrap">
     <a class="brand" href="index.html"><span class="ball" aria-hidden="true"></span>OUAK Mods</a>
     <nav aria-label="Main">
       <ul>
         <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="mods.html">Mods</a></li>
         <li><a href="index.html#install">Install</a></li>
         <li><a href="faq.html">FAQ</a></li>
         <li><a href="docs.html">Docs</a></li>
-        <li><a href="https://github.com/nmlacker/OUAK-Mods/releases">Releases</a></li>
+        <li><a class="icon-link" href="https://github.com/nmlacker/OUAK-Mods" aria-label="GitHub"><svg class="ico" aria-hidden="true"><use href="#gh"/></svg>GitHub</a></li>
       </ul>
     </nav>
   </div>
@@ -28,45 +32,22 @@
     <h1>Mods for Once Upon a KATAMARI</h1>
     <p class="lead">Online play, a mod menu for speedrunning and messing around, custom music playlists, a dash gauge, and the OUAK Modding API: fixes for the game's broken and unfinished features, and a base for making your own mods.</p>
     <div class="buttons">
-      <a class="btn" id="dl-mod" href="https://github.com/nmlacker/OUAK-Mods/releases/latest/download/OUAK_Mods.zip">Download the mods</a>
-      <a class="btn secondary" id="dl-src" href="https://github.com/nmlacker/OUAK-Mods">Download the source</a>
+      <a class="btn" href="mods.html">Get the mods</a>
+      <a class="btn secondary" href="https://github.com/nmlacker/OUAK-Mods"><svg class="ico" aria-hidden="true"><use href="#gh"/></svg>Source on GitHub</a>
     </div>
     <p class="release" id="release" aria-live="polite">Checking the latest release…</p>
   </section>
 
   <section class="panel" aria-labelledby="mods-title">
     <div class="scallop" aria-hidden="true"></div>
-    <h2 id="mods-title">What's inside</h2>
+    <h2 id="mods-title">The mods</h2>
     <div class="grid">
-      <article class="card">
-        <span class="tag">REQUIRED</span>
-        <h3>OUAK Modding API</h3>
-        <p>The shared base every mod uses: the mod window, hotkeys, game events, stages and modes, saves, logging, asset replacement and hot mods. It also patches broken and unused parts of the game, like the Race and Target modes, King Chances, unlimited dash and the unfinished freebies. Updates itself automatically.</p>
-      </article>
-      <article class="card">
-        <span class="tag">MOD</span>
-        <h3>OUAK Mod Menu</h3>
-        <p>Single-player tools for speedrunning, TASing and messing around: freebies, the stage clock, stages and modes, unlocks, and save backups.</p>
-      </article>
-      <article class="card">
-        <span class="tag">MOD</span>
-        <h3>OUAK Multiplayer</h3>
-        <p>Play the story stages online together, plus Katamari Ball against CPU princes with custom rules, King Chances, Race and Target.</p>
-      </article>
-    </div>
-    <h2 style="margin-top: 28px;">Standalone mods</h2>
-    <p style="color: var(--muted); margin-top: 0;">Separate from the download above; not released yet.</p>
-    <div class="grid">
-      <article class="card">
-        <span class="tag">STANDALONE</span>
-        <h3>OUAK Song Selector</h3>
-        <p>Playlists of the game's music and your own songs (MP3, FLAC, M4A, WMA, WAV and more), updated as you add files, with play, pause, next, previous, loop and shuffle.</p>
-      </article>
-      <article class="card">
-        <span class="tag">STANDALONE</span>
-        <h3>OUAK Dash Bar</h3>
-        <p>Shows how much dash you have left on the game's own unused dash gauge, and how long until it comes back.</p>
-      </article>
+      <a class="card linkcard" href="mods.html"><span class="tag">ALL IN ONE</span><h3>OUAK Modpack</h3><p>Every released mod and game fix in one download.</p></a>
+      <a class="card linkcard" href="mods.html#api"><span class="tag">REQUIRED</span><h3>OUAK Modding API</h3><p>The base every mod uses, and the fixes for the game's unfinished features.</p></a>
+      <a class="card linkcard" href="mods.html#modmenu"><span class="tag">MOD</span><h3>OUAK Mod Menu</h3><p>Single-player tools for speedrunning and messing around.</p></a>
+      <a class="card linkcard" href="mods.html#multiplayer"><span class="tag">MOD</span><h3>OUAK Multiplayer</h3><p>The story stages online together, plus Katamari Ball your way.</p></a>
+      <a class="card linkcard" href="mods.html#songselector"><span class="tag">STANDALONE</span><h3>OUAK Song Selector</h3><p>Playlists of the game's music and your own songs.</p></a>
+      <a class="card linkcard" href="mods.html#dashbar"><span class="tag">STANDALONE</span><h3>OUAK Dash Bar</h3><p>Your Prince Dash on the game's own unused gauge.</p></a>
     </div>
   </section>
 
@@ -75,10 +56,10 @@
     <h2 id="install-title">Install</h2>
     <ol class="steps">
       <li>Install <a href="https://melonwiki.xyz/">MelonLoader</a> 0.7 into your Once Upon a KATAMARI folder (Steam: right-click the game › Manage › Browse local files) and start the game once.</li>
-      <li>Download the mods and unzip them into the same folder, so <code>Mods</code> and <code>UserLibs</code> merge with the ones MelonLoader made.</li>
+      <li>Download the <a href="mods.html">OUAK Modpack</a> and unzip it into the same folder, so <code>Mods</code> and <code>UserLibs</code> merge with the ones MelonLoader made.</li>
       <li>Start the game and press <kbd>Right Shift</kbd> for the mod window.</li>
     </ol>
-    <p>The download holds the API, the Mod Menu and Multiplayer. The API is required; the others are optional and each needs only the API. For online play, everyone needs the same version: the API keeps you up to date by itself and asks you to restart when an update is installed.</p>
+    <p>The modpack holds the API, the Mod Menu and Multiplayer. The API is required; the others are optional and each needs only the API. For online play, everyone needs the same version: the API keeps you up to date by itself and asks you to restart when an update is installed.</p>
   </section>
 </main>
 
@@ -98,8 +79,6 @@
     const rel = await r.json();
     const date = new Date(rel.published_at).toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
     out.textContent = "Latest: " + rel.tag_name + " · " + date;
-    // GitHub's own source archive of that release.
-    document.getElementById("dl-src").href = "https://github.com/nmlacker/OUAK-Mods/archive/refs/tags/" + encodeURIComponent(rel.tag_name) + ".zip";
   } catch (e) {
     out.textContent = "See the Releases page for the latest version.";
   }
