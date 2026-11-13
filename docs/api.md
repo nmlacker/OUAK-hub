@@ -1,14 +1,15 @@
 # OUAK mods and the OUAK Modding API
 
-MelonLoader 0.7 (IL2CPP) mods for *Once Upon a KATAMARI*, as three separate mods:
+MelonLoader 0.7 (IL2CPP) mods for *Once Upon a KATAMARI*, as separate mods. The released ones come together as the **OUAK Modpack** (`OUAK_Mods.zip` of each [release](https://github.com/nmlacker/OUAK-Mods/releases)), and each also as its own zip; the website lists them: https://nmlacker.github.io/OUAK-hub/mods.html
 
 | Mod | DLL (in `Mods/`) | What it is |
 | --- | --- | --- |
-| **OUAK Modding API** | `OUAKModAPI.dll` + `UserLibs/ImGui.NET.dll` + `UserLibs/cimgui.dll` | The shared base every mod below uses, and that your own mods can use: the mod window and windows of your own (Dear ImGui), hotkeys, game events, stages and game modes, saves and backups, screenshots, logging, asset replacement and hot mods. It is also a **patch for the game**: it fixes broken or unused parts (Race and Target modes, Target points and CPU princes, King Chances, Shoes / Crown / Mushroom in story stages, the Random freebie) so mods can use them. Each fix only acts where it belongs, which only happens through mods; on its own the API changes nothing in the game except the mouse-pointer fix. **Required by the other two.** |
+| **OUAK Modding API** | `OUAKModAPI.dll` + `UserLibs/ImGui.NET.dll` + `UserLibs/cimgui.dll` | The shared base every mod below uses, and that your own mods can use: the mod window and windows of your own (Dear ImGui), hotkeys, game events, stages and game modes, saves and backups, screenshots, logging, asset replacement and hot mods. It is also a **patch for the game**: it fixes broken or unused parts (Race and Target modes, Target points and CPU princes, King Chances, Shoes / Crown / Mushroom in story stages, the Random freebie) so mods can use them. Each fix only acts where it belongs, which only happens through mods; on its own the API changes nothing in the game except the mouse-pointer fix. **Required by the other mods.** |
 | **OUAK Mod Menu** | `OUAKModMenu.dll` | Single-player cheats and tools for speedrunning, TASing and messing around: freebies (with the API's story-freebie patches), the stage clock, stages and modes, hotkeys, unlocks, DLC locking, save backups. See [OUAKModMenu/README.md](OUAKModMenu/README.md). |
 | **OUAK Multiplayer** | `OUAKMultiplayer.dll` | Online play over the mods' own connection, with the host in charge of restarts and returns to the Plaza, and the **Katamari Ball** tab: offline matches against CPU princes with custom rules, King Chances, Race and Target (with the API's patches). See [OUAKMultiplayer/README.md](OUAKMultiplayer/README.md). |
+| **OUAK Dash Bar** | `OUAKDashBar.dll` | Shows how much Prince Dash you have left on the game's own unused dash gauge, and counts down until it comes back; rainbow during unlimited dash. In the modpack since 0.1.1. See [OUAKDashBar/README.md](OUAKDashBar/README.md). |
 
-Install the API plus either or both mods: each mod needs only the API, not the other. Every player in an online session needs the same OUAK Multiplayer version (protocol v15).
+Install the API plus any of the mods: each mod needs only the API, not the others. Every player in an online session needs the same OUAK Multiplayer protocol (v16). OUAK Song Selector (`OUAKSongSelector/`) isn't released yet.
 
 Press **Right Shift** in game for the mod window (rebind it in the Keys tab). Every installed mod adds its tabs to this one window, listed down its left side. It's drawn with Dear ImGui: drag the title bar to move it, the corner to resize it; a controller moves through it (D-pad or left stick, A presses, B backs out) while it has the game's controls. The API's own tab, **Mods**, lists:
 * the installed mods and hot mods (reload / unload);

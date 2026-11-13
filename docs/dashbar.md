@@ -6,15 +6,16 @@ dash bar, which the game never shows. It also counts down how long it is until t
 * **Story stages and multiplayer modes:** Katamari Ball battles, the Race and Target modes, and versus online. The OUAK Multiplayer mod's own online sessions play story stages, so they're covered too. Never on the ship, the Plaza or in menus.
 * **The game's own bar:** the dash gauge at the bottom centre of the screen, with its dash icon. It's grey and yellow normally, and turns rainbow while you have unlimited dash.
 * **Always on top:** it's drawn on an overlay canvas of its own, after the 3D scene and the game's other HUD layers. The bar's frame art is semi-transparent, so busy scenery still shows *through* an empty bar.
-* **Hides with the HUD:** when you pause, during cutscenes, the opening and the results. In a match it shows only while the round runs: not during the countdown before it, nor after the round ends.
+* **Out of the way:** the bottom centre is shared with the game's stage-goal counter (e.g. "13 / 100"), its freebie slot and the prince's picture, and in an OUAK Multiplayer session with the player bar. The bar uses one of three places: the game's own; straight up, above a player bar or the goal counter; or beside the freebie slot, smaller if needed. It doesn't move for pop-ups that come and go.
+* **Always on in a stage:** in a story stage it shows the whole time you're in it, also while the King speaks (his opening talk and his remarks). It hides only in the pause menu, in cutscenes and once the stage has ended. In a match it shows only while the round runs: not during the countdown before it, nor after the round ends.
 
-A standalone mod: it isn't part of the OUAK Mods bundle (the Mod Menu / Multiplayer zip and solution). It needs only the **OUAK Modding API** (`OUAKModAPI.dll`). Install `OUAKDashBar.dll` to `Mods/`.
+It works on its own: it needs only the **OUAK Modding API** (`OUAKModAPI.dll`), not the Mod Menu or OUAK Multiplayer. Install `OUAKDashBar.dll` to `Mods/`.
 
 ## What it shows
 
-![The bar in each state, from the in-game test's frame captures](docs/dashbar_states.png)
+![The bar in each state, from the in-game test's frame captures](https://raw.githubusercontent.com/nmlacker/OUAK-Mods/main/OUAKDashBar/docs/dashbar_states.png)
 
-![The bar in a Katamari Ball battle, Race and Target](docs/dashbar_multiplayer.png)
+![The bar in a Katamari Ball battle, Race and Target](https://raw.githubusercontent.com/nmlacker/OUAK-Mods/main/OUAKDashBar/docs/dashbar_multiplayer.png)
 
 | What happens | The bar | The countdown (right of the bar) |
 | --- | --- | --- |
@@ -59,8 +60,28 @@ In battles the game's code still writes to the gauge when unlimited dash starts 
 * The mod moves the gauge to an overlay canvas of its own, `OUAKDashBar_OnTop`. It sits under `MainGameUICanvas`, so it goes away with the stage's HUD.
 * That canvas uses the HUD's own scaler settings, kept in sync, so the bar stays exactly where the game put it but is drawn over the 3D scene.
 * Its sort order is −100, so other overlay screens stay above it.
-* If the game's message windows draw on a canvas that would now be under the bar, the bar hides while a message is up (`GlobalUIController.IsInMessage`).
+* The King's messages are on the overlay canvas `Canvas(Clone)` (sort order 100), above the bar's (−100), so his window covers the bar, not the other way round. Measured: his text at (1280, 737) and face at (828, 787) on a 2560 × 1440 screen, far above the bar.
 * The gauge goes back into `LAYER00` when the mod lets go of it.
+
+**Out of the way:** every frame it's shown, the bar keeps clear of:
+* the game's own HUD at the bottom of the screen: whatever each HUD piece (each child of `LAYER00` / `LAYER01`) actually draws there, the union of its visible images and texts, rescanned 10 times a second. Examples: the freebie slot (`ItemCanvas`), the stage-goal counter (`ClearTargetUI`), the sub-challenge counter;
+* the prince's picture at the bottom right (`MainGameUIManager.OujiBackLoader._myRect`, from 28% across it: measured, that's where the prince and his backdrop start);
+* other mods' HUD, which they report through the OUAK Modding API's `HudSpace`. OUAK Multiplayer claims its player bar as `OUAK Multiplayer/PlayerBar`, every frame it's drawn.
+
+It skips:
+* pieces off screen: in a stage without a count goal, the goal counter is parked just below the screen;
+* pop-ups that come and go while you roll: the last-caught object's name (`MonoNameDisplay`), the song title (`BGM`), and the markers pointing at other princes (`SonarGuide`, which sit at the screen edge whenever one is behind you; measured in battles and Target);
+* pieces still moving (they count after holding still for 0.6 s): measured, the freebie slot slides up from below the screen through the bar's place when you get a freebie.
+
+It uses one of three places, the first that's free, keeping 8 px (at 1440p) clear of everything:
+1. the game's own place (bottom centre);
+2. straight up, just above whatever is at or under it (a player bar, the goal counter);
+3. beside the freebie slot, on its right at the slot's height. It's drawn smaller (down to 55%) if that's what it takes to fit before the prince's picture.
+
+If none is free, it uses whichever covers the least. When its place gets taken it moves at once; it moves back to an earlier place only once that place has stayed free for 3 frames and 0.5 s, so it doesn't jump around. Only the mod's own overlay canvas moves and scales; the game's HUD canvas is never touched.
+* The wait also covers a claim that lapses for a frame. A claim lapses 0.25 s after its owner last renewed it, so one long frame can make it look gone. Measured: saving a frame capture took 0.45–0.55 s, and the bar dipped and came back before the wait was added.
+* Only the mod's own overlay canvas moves; the game's HUD canvas is never touched.
+* With an older API that has no `HudSpace`, it still keeps clear of the game's own counter and freebie slot.
 
 ## Settings
 
@@ -85,12 +106,13 @@ The build installs to `Mods/`, or doesn't install while the game is running.
 
 `UserData/OUAKDashBar/dashtest.flag` runs the in-game test once, then quits the game. It:
 1. loads the last-used slot, with every save write blocked while it runs;
-2. plays As Large As Possible 1, dashing with real L2 presses injected into the game's pad buffer;
+2. plays As Large As Possible 1, dashing with real presses injected into the game's pad buffer: the button that does the dash (L2) job, after the API's controller rebinding (`PadBindings.ButtonFor`);
 3. checks each state and takes frame captures to `UserData/OUAKDashBar/TestShots`;
 4. counts pixels in its own pictures, to prove the bar and the countdown are actually drawn;
 5. writes per-frame values to `UserData/OUAKDashBar/dashtest.csv` and `[DashBarTest] OK/FAIL` lines to the log.
 
 Flag words:
+* `watch`: press nothing, only watch another test, and check the bar against other mods' real HUD claims (pictures `watch_N`);
 * `probe`: only dump the game's gauge and show it at a few values, with the mod's own drawing paused;
 * where: `battle` (Katamari Ball, Battle (Jurassic), against three CPU princes), `race`, `target` (the API's modes), or none for the story stage;
 * `slot N`.
@@ -102,11 +124,11 @@ In a match the test makes the round long enough for its checks, then ends it. Ba
 
 ### Measured with it
 
-Last runs, each passing all its checks: Race and Target on 2026-11-08; the story stage and the battle again on 2026-11-09, after the API made unlimited dash free and nonstop:
+Last runs (2026-11-12, with the layout around the game's HUD and the bar always on in stages), each passing all its checks:
 
 | Where | Checks |
 | --- | --- |
-| Story stage: As Large As Possible 1, 5 cm | 31 |
+| Story stage: As Large As Possible 1, 5 cm (the player-bar, crowded-bottom and King checks included) | 49 |
 | Katamari Ball battle: Battle (Jurassic), against three CPU princes | 36 |
 | Race | 19 |
 | Target | 19 |
@@ -141,8 +163,33 @@ Not measured:
 * the Unlimited dash King Chance in battles: it uses the same flag and time as Shoes (60 s), not run in the tests;
 * hiding while `MultiplayGameManager.isGamePause` is set, which was never seen set.
 
+**Out of other mods' way**, measured in the story stage (2560 × 1440). The test claimed stand-ins with the player bar's exact layout and drew them in blue; they match the real claim, below.
+
+| Claimed space | Its top | The bar's frame bottom | Bar pixels inside the claim |
+| --- | --- | --- | --- |
+| 2 players, one row | 125.3 px up | 133.3 px (moved up 68.3 px) | 0 |
+| 8 players, two rows of four | 240 px up | 248 px (moved up 182.9 px) | 0 |
+| 8 players, one row | 125.3 px up | 133.3 px (moved up 68.3 px) | 0 |
+| A space beside the bar (not under it) | 380 px up | 65.1 px (not moved) | 0 |
+| Released | none | 65.1 px, the game's own place | |
+
+The countdown stayed beside the frame in every case, and the bar was drawn in full (15,667–15,703 bar-yellow pixels).
+
+**The real player bar:** in OUAK Multiplayer's online test (2 players: you and the loopback bot), the player bar's claim was (977.33, 1314.67) 605.33 × 106.67, the same rectangle as the 2-player stand-in.
+* The Dash Bar's frame bottom was at 132.9–133.3 px in 3 pictures, 8 px above the player bar.
+* The bar was drawn in full: 19,162–21,656 bar-yellow pixels in its frame.
+* There were 0 dips over the whole test: it never dropped home and came back while the player bar stayed.
+
+This check is the test's `watch` flag word: it presses nothing, it only watches another test. Here it ran alongside OUAK Multiplayer's online test (`UserData/OUAKModMenu/onlinetest.flag` with `run Stage_Big1`).
+
+![The Dash Bar above the real player bar, and above a two-row stand-in](https://raw.githubusercontent.com/nmlacker/OUAK-Mods/main/OUAKDashBar/docs/dashbar_playerbar.png)
+
+![A crowded bottom centre: the goal counter, the freebie slot in use and a 1-player bar; the dash bar moves beside the slot](https://raw.githubusercontent.com/nmlacker/OUAK-Mods/main/OUAKDashBar/docs/dashbar_layout.png)
+
+![The King speaking mid-stage: the dash bar stays](https://raw.githubusercontent.com/nmlacker/OUAK-Mods/main/OUAKDashBar/docs/dashbar_king.png)
+
 **Always on top**, measured:
 * The bar is on the overlay canvas at exactly the screen place the game's own canvas gives it: frame at (938.67, 65.07), 682.67 × 136.53 px at 2560 × 1440, before and after the move.
 * A test object with the prince's own material, 0.05 in front of the camera over the bar's place, leaves the bar whole: 15,914 bar-yellow pixels with the object, 15,918 without.
 * For comparison, back in the game's canvas the bar wasn't covered either (15,913): the HUD's `UICamera` is a separate camera 6 units away. One earlier picture looked as if the katamari covered the bar. It was the empty, semi-transparent bar with the scenery showing through it.
-* The bar is hidden during the game's message windows (`GlobalUIController.IsInMessage`), because some of the game's message canvases are camera-space and would be under it. This is from the canvas list, not seen in a run: no message came up mid-stage in the tests.
+* The bar no longer hides during the game's message windows (the user's choice, 2026-11-12).
