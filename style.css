@@ -27,7 +27,7 @@ body {
 a { color: var(--yellow); }
 a:hover { color: #fff59a; }
 
-.wrap { width: min(1760px, 100% - 32px); margin: 0 auto; }
+.wrap { width: min(1440px, 100% - 32px); margin: 0 auto; }
 
 /* header */
 .top { padding: 18px 0; }
