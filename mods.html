@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OUAK Mods</title>
 <meta name="description" content="Every OUAK mod for Once Upon a KATAMARI, with its release and source: the OUAK Modpack, the Modding API, Mod Menu, Multiplayer, Song Selector and Dash Bar.">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -32,7 +32,7 @@
   <section class="panel modpack" aria-labelledby="pack-title">
     <div class="pack-main">
       <div class="pack-head">
-        <img class="pic big" src="images/modpack.svg" alt="" width="112" height="112">
+        <div class="pic big" aria-hidden="true"><!-- gameplay clip later: <img src="images/modpack.gif" alt=""> --></div>
         <div>
           <span class="tag">ALL IN ONE</span>
           <h1 id="pack-title">OUAK Modpack</h1>
@@ -79,74 +79,64 @@
     <p class="muted">Each mod needs only the OUAK Modding API. Get them all with the modpack above, or one at a time here: each download unzips into your game folder like the modpack.</p>
     <div class="grid mods">
       <article class="card mod" id="api" data-asset="OUAKModAPI">
-        <div class="mod-head">
-          <img class="pic" src="images/api.svg" alt="" width="88" height="88">
-          <div class="mod-title">
-            <span class="tag">REQUIRED</span>
-            <h3>OUAK Modding API</h3>
-            <div class="links">
-              <a class="btn small rel" href="https://github.com/nmlacker/OUAK-Mods/releases/latest/download/OUAKModAPI-3.0.0.zip"><svg class="ico" aria-hidden="true"><use href="#dl"/></svg><span>Download v3.0.0</span></a>
-              <a class="btn small secondary" href="https://github.com/nmlacker/OUAK-Mods/tree/main/OUAKModAPI"><svg class="ico" aria-hidden="true"><use href="#gh"/></svg>Source</a>
-            </div>
+        <div class="pic" aria-hidden="true"><!-- gameplay clip later: <img src="images/api.gif" alt=""> --></div>
+        <div class="mod-title">
+          <span class="tag">REQUIRED</span>
+          <h3>OUAK Modding API</h3>
+          <div class="links">
+            <a class="btn small rel" href="https://github.com/nmlacker/OUAK-Mods/releases/latest/download/OUAKModAPI-3.0.0.zip"><svg class="ico" aria-hidden="true"><use href="#dl"/></svg><span>Download v3.0.0</span></a>
+            <a class="btn small secondary" href="https://github.com/nmlacker/OUAK-Mods/tree/main/OUAKModAPI"><svg class="ico" aria-hidden="true"><use href="#gh"/></svg>Source</a>
           </div>
         </div>
-        <p>The shared base every mod uses: the mod window, hotkeys, game events, stages and modes, saves, logging, asset replacement and hot mods. It also fixes the game's broken and unfinished features, and keeps your mods up to date by itself. <a class="doclink" href="docs.html?doc=api">Docs</a></p>
+        <p class="desc">The shared base every mod uses: the mod window, hotkeys, game events, stages and modes, saves, logging, asset replacement and hot mods. It also fixes the game's broken and unfinished features, and keeps your mods up to date by itself. <a class="doclink" href="docs.html?doc=api">Docs</a></p>
       </article>
       <article class="card mod" id="modmenu" data-asset="OUAKModMenu">
-        <div class="mod-head">
-          <img class="pic" src="images/modmenu.svg" alt="" width="88" height="88">
-          <div class="mod-title">
-            <span class="tag">MOD</span>
-            <h3>OUAK Mod Menu</h3>
-            <div class="links">
-              <a class="btn small rel" href="https://github.com/nmlacker/OUAK-Mods/releases/latest/download/OUAKModMenu-1.5.0.zip"><svg class="ico" aria-hidden="true"><use href="#dl"/></svg><span>Download v1.5.0</span></a>
-              <a class="btn small secondary" href="https://github.com/nmlacker/OUAK-Mods/tree/main/OUAKModMenu"><svg class="ico" aria-hidden="true"><use href="#gh"/></svg>Source</a>
-            </div>
+        <div class="pic" aria-hidden="true"><!-- gameplay clip later: <img src="images/modmenu.gif" alt=""> --></div>
+        <div class="mod-title">
+          <span class="tag">MOD</span>
+          <h3>OUAK Mod Menu</h3>
+          <div class="links">
+            <a class="btn small rel" href="https://github.com/nmlacker/OUAK-Mods/releases/latest/download/OUAKModMenu-1.5.0.zip"><svg class="ico" aria-hidden="true"><use href="#dl"/></svg><span>Download v1.5.0</span></a>
+            <a class="btn small secondary" href="https://github.com/nmlacker/OUAK-Mods/tree/main/OUAKModMenu"><svg class="ico" aria-hidden="true"><use href="#gh"/></svg>Source</a>
           </div>
         </div>
-        <p>Single-player tools for speedrunning, TASing and messing around: give yourself any freebie, control the stage clock, jump to stages and modes, unlock things and back up your saves. <a class="doclink" href="docs.html?doc=modmenu">Docs</a></p>
+        <p class="desc">Single-player tools for speedrunning, TASing and messing around: give yourself any freebie, control the stage clock, jump to stages and modes, unlock things and back up your saves. <a class="doclink" href="docs.html?doc=modmenu">Docs</a></p>
       </article>
       <article class="card mod" id="multiplayer" data-asset="OUAKMultiplayer">
-        <div class="mod-head">
-          <img class="pic" src="images/multiplayer.svg" alt="" width="88" height="88">
-          <div class="mod-title">
-            <span class="tag">MOD</span>
-            <h3>OUAK Multiplayer</h3>
-            <div class="links">
-              <a class="btn small rel" href="https://github.com/nmlacker/OUAK-Mods/releases/latest/download/OUAKMultiplayer-2.2.0.zip"><svg class="ico" aria-hidden="true"><use href="#dl"/></svg><span>Download v2.2.0</span></a>
-              <a class="btn small secondary" href="https://github.com/nmlacker/OUAK-Mods/tree/main/OUAKMultiplayer"><svg class="ico" aria-hidden="true"><use href="#gh"/></svg>Source</a>
-            </div>
+        <div class="pic" aria-hidden="true"><!-- gameplay clip later: <img src="images/multiplayer.gif" alt=""> --></div>
+        <div class="mod-title">
+          <span class="tag">MOD</span>
+          <h3>OUAK Multiplayer</h3>
+          <div class="links">
+            <a class="btn small rel" href="https://github.com/nmlacker/OUAK-Mods/releases/latest/download/OUAKMultiplayer-2.2.0.zip"><svg class="ico" aria-hidden="true"><use href="#dl"/></svg><span>Download v2.2.0</span></a>
+            <a class="btn small secondary" href="https://github.com/nmlacker/OUAK-Mods/tree/main/OUAKMultiplayer"><svg class="ico" aria-hidden="true"><use href="#gh"/></svg>Source</a>
           </div>
         </div>
-        <p>Roll through the story stages online together, with voice and quick chat, votes and the host in charge. Also Katamari Ball against CPU princes with custom rules, King Chances, Race and Target. <a class="doclink" href="docs.html?doc=multiplayer">Docs</a></p>
+        <p class="desc">Roll through the story stages online together, with voice and quick chat, votes and the host in charge. Also Katamari Ball against CPU princes with custom rules, King Chances, Race and Target. <a class="doclink" href="docs.html?doc=multiplayer">Docs</a></p>
       </article>
       <article class="card mod" id="dashbar" data-asset="OUAKDashBar">
-        <div class="mod-head">
-          <img class="pic" src="images/dashbar.svg" alt="" width="88" height="88">
-          <div class="mod-title">
-            <span class="tag">MOD</span>
-            <h3>OUAK Dash Bar</h3>
-            <div class="links">
-              <a class="btn small rel" href="https://github.com/nmlacker/OUAK-Mods/releases/latest/download/OUAKDashBar-1.0.0.zip"><svg class="ico" aria-hidden="true"><use href="#dl"/></svg><span>Download v1.0.0</span></a>
-              <a class="btn small secondary" href="https://github.com/nmlacker/OUAK-Mods/tree/main/OUAKDashBar"><svg class="ico" aria-hidden="true"><use href="#gh"/></svg>Source</a>
-            </div>
+        <div class="pic" aria-hidden="true"><!-- gameplay clip later: <img src="images/dashbar.gif" alt=""> --></div>
+        <div class="mod-title">
+          <span class="tag">MOD</span>
+          <h3>OUAK Dash Bar</h3>
+          <div class="links">
+            <a class="btn small rel" href="https://github.com/nmlacker/OUAK-Mods/releases/latest/download/OUAKDashBar-1.0.0.zip"><svg class="ico" aria-hidden="true"><use href="#dl"/></svg><span>Download v1.0.0</span></a>
+            <a class="btn small secondary" href="https://github.com/nmlacker/OUAK-Mods/tree/main/OUAKDashBar"><svg class="ico" aria-hidden="true"><use href="#gh"/></svg>Source</a>
           </div>
         </div>
-        <p>Shows how much Prince Dash you have left on the game's own dash gauge, which the game never shows, and counts down until it comes back. Turns rainbow during unlimited dash. <a class="doclink" href="docs.html?doc=dashbar">Docs</a></p>
+        <p class="desc">Shows how much Prince Dash you have left on the game's own dash gauge, which the game never shows, and counts down until it comes back. Turns rainbow during unlimited dash. <a class="doclink" href="docs.html?doc=dashbar">Docs</a></p>
       </article>
       <article class="card mod" id="songselector" data-asset="OUAKSongSelector">
-        <div class="mod-head">
-          <img class="pic" src="images/songselector.svg" alt="" width="88" height="88">
-          <div class="mod-title">
-            <span class="tag">MOD</span>
-            <h3>OUAK Song Selector</h3>
-            <div class="links">
-              <span class="btn small rel off" aria-disabled="true"><svg class="ico" aria-hidden="true"><use href="#dl"/></svg><span>Not released yet</span></span>
-              <a class="btn small secondary" href="https://github.com/nmlacker/OUAK-Mods/tree/main/OUAKSongSelector"><svg class="ico" aria-hidden="true"><use href="#gh"/></svg>Source</a>
-            </div>
+        <div class="pic" aria-hidden="true"><!-- gameplay clip later: <img src="images/songselector.gif" alt=""> --></div>
+        <div class="mod-title">
+          <span class="tag">MOD</span>
+          <h3>OUAK Song Selector</h3>
+          <div class="links">
+            <span class="btn small rel off" aria-disabled="true"><svg class="ico" aria-hidden="true"><use href="#dl"/></svg><span>Not released yet</span></span>
+            <a class="btn small secondary" href="https://github.com/nmlacker/OUAK-Mods/tree/main/OUAKSongSelector"><svg class="ico" aria-hidden="true"><use href="#gh"/></svg>Source</a>
           </div>
         </div>
-        <p>Playlists that mix the game's music with your own songs (MP3, FLAC, M4A, WMA, WAV and more), updated as you add files, with play, pause, next, previous, loop and shuffle. Choose where each playlist plays. <a class="doclink" href="docs.html?doc=songselector">Docs</a></p>
+        <p class="desc">Playlists that mix the game's music with your own songs (MP3, FLAC, M4A, WMA, WAV and more), updated as you add files, with play, pause, next, previous, loop and shuffle. Choose where each playlist plays. <a class="doclink" href="docs.html?doc=songselector">Docs</a></p>
       </article>
     </div>
   </section>
